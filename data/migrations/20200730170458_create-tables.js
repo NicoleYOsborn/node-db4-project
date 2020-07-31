@@ -8,7 +8,7 @@ exports.up = function(knex) {
       tbl.increments();
       tbl.integer('step');
       tbl.string('action', 400);
-      tbl.integer('recipe_id').unsigned().notNullable().references('recipes.id');
+      tbl.integer('recipe_id').unsigned().notNullable().references('recipes.id').onDelete('CASCADE').onUpdate('CASCADE');
   })
   .createTable('ingredients', tbl =>{
       tbl.increments();
@@ -23,8 +23,8 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
     return knex.schema
-    .dropTableifExists('recipe_ingredients')
-    .dropTableifExists('ingredients')
-    .dropTableifExists('instructions')
-    .dropTableifExists('recipes');
+    .dropTableIfExists('recipe_ingredients')
+    .dropTableIfExists('ingredients')
+    .dropTableIfExists('instructions')
+    .dropTableIfExists('recipes');
 };
